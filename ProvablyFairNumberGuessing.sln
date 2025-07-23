@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ProvablyFairNumberGuessing", "ProvablyFairNumberGuessing.pyproj", "{77F56E0D-F9DB-4BD0-99EC-BD068E5985F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77F56E0D-F9DB-4BD0-99EC-BD068E5985F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F56E0D-F9DB-4BD0-99EC-BD068E5985F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DF81D69-5192-4AD9-A50A-D9FC1F1CE561}
+	EndGlobalSection
+EndGlobal

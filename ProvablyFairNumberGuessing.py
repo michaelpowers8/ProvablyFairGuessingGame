@@ -171,7 +171,6 @@ def set_number_guesses(difficulty: str, easy: Button, medium: Button, hard: Butt
     elif difficulty.lower() == 'hard':
         guesses = 2
 
-    destroy_difficulty_buttons(easy, medium, hard, expert)
     guess_numbers, guess_label, feedback_label = write_guess_numbers(
         canvas, font, answer, guesses, nonce, screen, seed_writer_turtle, server_hashed, client, server)
     return guesses, guess_numbers
@@ -179,6 +178,7 @@ def set_number_guesses(difficulty: str, easy: Button, medium: Button, hard: Butt
 def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: int,
                            nonce: int, screen: _Screen, seed_writer_turtle: Turtle,
                            server_hashed: str, client: str, server: str) -> tuple[Button, Button, Button, Button]:
+    # Create difficulty buttons
     easy: Button = Button(canvas.master, text="Easy", font=font)
     easy.place(relx=0.2, rely=0.7)
     medium: Button = Button(canvas.master, text="Medium", font=font)
@@ -188,20 +188,93 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
     expert: Button = Button(canvas.master, text="Expert", font=font)
     expert.place(relx=0.8, rely=0.7)
 
-    easy.configure(command=lambda: set_number_guesses(
-        "easy", easy, medium, hard, expert, canvas, font, answer,
-        nonce, screen, seed_writer_turtle, server_hashed, client, server))
-    medium.configure(command=lambda: set_number_guesses(
-        "medium", easy, medium, hard, expert, canvas, font, answer,
-        nonce, screen, seed_writer_turtle, server_hashed, client, server))
-    hard.configure(command=lambda: set_number_guesses(
-        "hard", easy, medium, hard, expert, canvas, font, answer,
-        nonce, screen, seed_writer_turtle, server_hashed, client, server))
-    expert.configure(command=lambda: set_number_guesses(
-        "expert", easy, medium, hard, expert, canvas, font, answer,
-        nonce, screen, seed_writer_turtle, server_hashed, client, server))
+    # Create Rotate Seeds button
+    rotate_button = Button(canvas.master, text="Rotate Seeds", font=font, bg="orange")
+    rotate_button.place(relx=0.5, rely=0.8, anchor="center")
 
-    return easy, medium, hard, expert
+    def rotate_seeds():
+        # Create a new popup window
+        popup = Tk()
+        popup.title("Rotate Seeds")
+        popup.attributes('-fullscreen', True)
+        
+        # Generate new seeds
+        new_server = generate_server_seed()
+        new_client = generate_client_seed()
+
+        # Server seed display (read-only)
+        Label(popup, text="Previous Server Seed:", font=font,pady=20,padx=20).pack()
+        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry.insert(0, sha256_encrypt(server))
+        server_entry.config(state='readonly')
+        server_entry.pack()
+
+        # Server seed display (read-only)
+        Label(popup, text="Previous Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
+        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry.insert(0, sha256_encrypt(server_hashed))
+        server_entry.config(state='readonly')
+        server_entry.pack()
+
+        # Server seed display (read-only)
+        Label(popup, text="Previous Client Seed:", font=font,pady=60,padx=20).pack()
+        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry.insert(0, sha256_encrypt(client))
+        server_entry.config(state='readonly')
+        server_entry.pack()
+        
+        # Server seed display (read-only)
+        Label(popup, text="New Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
+        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry.insert(0, sha256_encrypt(new_server))
+        server_entry.config(state='readonly')
+        server_entry.pack()
+        
+        # Client seed entry (editable)
+        Label(popup, text="Client Seed (edit if desired):", font=font,pady=20,padx=20).pack()
+        client_entry = Entry(popup, font=font, width=100, justify='center')
+        client_entry.insert(0, new_client)
+        client_entry.pack()
+        
+        def apply_changes():
+            nonlocal server, server_hashed, client
+            # Update seeds with user's input
+            server = new_server
+            server_hashed = sha256_encrypt(server)
+            client = client_entry.get()
+            
+            # Clear and redraw screen with new seeds
+            clear_seeds_from_screen(seed_writer_turtle, screen)
+            write_seeds_to_screen(server_hashed, client, nonce, seed_writer_turtle, screen, font)
+            popup.destroy()
+        
+        # Apply button
+        apply_button = Button(popup, text="Apply", font=font, command=apply_changes)
+        apply_button.pack(pady=10)
+        
+        popup.mainloop()
+
+    rotate_button.configure(command=rotate_seeds)
+
+    def destroy_all_buttons():
+        destroy_difficulty_buttons(easy, medium, hard, expert)
+        rotate_button.destroy()
+
+    # Configure difficulty buttons to destroy all buttons when clicked
+    easy.configure(command=lambda: [destroy_all_buttons(), set_number_guesses(
+        "easy", easy, medium, hard, expert, canvas, font, answer,
+        nonce, screen, seed_writer_turtle, server_hashed, client, server)])
+    medium.configure(command=lambda: [destroy_all_buttons(), set_number_guesses(
+        "medium", easy, medium, hard, expert, canvas, font, answer,
+        nonce, screen, seed_writer_turtle, server_hashed, client, server)])
+    hard.configure(command=lambda: [destroy_all_buttons(), set_number_guesses(
+        "hard", easy, medium, hard, expert, canvas, font, answer,
+        nonce, screen, seed_writer_turtle, server_hashed, client, server)])
+    expert.configure(command=lambda: [destroy_all_buttons(), set_number_guesses(
+        "expert", easy, medium, hard, expert, canvas, font, answer,
+        nonce, screen, seed_writer_turtle, server_hashed, client, server)])
+
+    return easy, medium, hard, expert, rotate_button
 
 def main():
     # Get the path to the folder this script is in

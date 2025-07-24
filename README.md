@@ -35,8 +35,6 @@ The number generation formula:
 4. Type pip3 install -r requirements.txt
 5. pythonw ProvablyFairNumberGuessing.py
 
-# Here's a detailed provably fair calculation breakdown in README.md format that explains exactly how your number generation system works:
-
 ## Provably Fair Calculation Breakdown
 
 ### Game Parameters

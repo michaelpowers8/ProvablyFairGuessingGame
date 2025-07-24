@@ -217,7 +217,10 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
         server_entry.pack()
 
         # Server seed display (read-only)
-        Label(popup, text="Previous Client Seed:", font=font,pady=60,padx=20).pack()
+        Label(popup, text="", font=font,pady=60,padx=20).pack()
+
+        # Server seed display (read-only)
+        Label(popup, text="Previous Client Seed:", font=font,pady=20,padx=20).pack()
         server_entry = Entry(popup, font=font, width=100, justify='center')
         server_entry.insert(0, sha256_encrypt(client))
         server_entry.config(state='readonly')
@@ -242,6 +245,7 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
             server = new_server
             server_hashed = sha256_encrypt(server)
             client = client_entry.get()
+            nonce = 1
             
             # Clear and redraw screen with new seeds
             clear_seeds_from_screen(seed_writer_turtle, screen)
@@ -293,6 +297,9 @@ def main():
 
     screen = Screen()
     screen.setup(width=1.0,height=1.0,startx=None,starty=None)
+    screen.cv._rootwindow.resizable(False, False)  # Prevent resizing
+    screen.cv._rootwindow.wm_attributes("-fullscreen", True)  # Force fullscreen
+    screen.cv._rootwindow.protocol("WM_DELETE_WINDOW", lambda: None)  # Disable close button
     canvas:Canvas = screen.getcanvas()
     seed_writer_turtle:Turtle = Turtle(visible=False)
 

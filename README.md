@@ -29,8 +29,7 @@ The number generation formula:
 
 ## Installation
 
-1. Download python from [https://www.python.org/downloads/release/python-3126/](https://www.python.org/downloads/release/python-3126/)
-2. Install requirements:
-   ```bash
-   pip install turtle tkinter
-   ```
+1. Download python Windows Installer(64-bit) from [HERE](https://www.python.org/downloads/release/python-3126/) 
+2. Open Command Prompt
+3. Type pip3 install -r requirements.txt
+4. pythonw

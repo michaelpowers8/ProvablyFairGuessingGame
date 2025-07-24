@@ -32,4 +32,4 @@ The number generation formula:
 1. Download python Windows Installer(64-bit) from [HERE](https://www.python.org/downloads/release/python-3126/) 
 2. Open Command Prompt
 3. Type pip3 install -r requirements.txt
-4. pythonw
+4. pythonw ProvablyFairNumberGuessing.py

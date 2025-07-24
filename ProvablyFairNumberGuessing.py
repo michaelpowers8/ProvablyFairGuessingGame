@@ -289,10 +289,9 @@ def main():
     with open(config_path,"rb") as file:
         configuration:dict[str,str|int] = json.load(file)
 
-    server:str = configuration["ServerSeed"]
     server:str = generate_server_seed()
     server_hashed:str = sha256_encrypt(server)
-    client:str = configuration["ClientSeed"]
+    client:str = generate_client_seed()
     nonces:range = range(configuration["MinimumNonce"],configuration["MaximumNonce"]+1)
 
     screen = Screen()

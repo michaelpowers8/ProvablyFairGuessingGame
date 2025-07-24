@@ -125,7 +125,6 @@ To manually verify a game result:
 
 ### Example Verification
 ```
-Given: 
 Server Seed: aFDe1176F59bcCf9CaBf4d39D1D3dB36c2eeb04ccaEF1ca59Ea2DefcA4D5cABB 
 Client Seed: EDD97dA3B4E83301aFba
 Nonce: 1

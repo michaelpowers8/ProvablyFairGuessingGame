@@ -126,30 +126,23 @@ To manually verify a game result:
 ### Example Verification
 
 Given:
-- Server Seed: `a1b2c3...` (64 hex chars)
-- Client Seed: `x9y8z7...` (20 hex chars)
-- Nonce: 5
+Server Seed: aFDe1176F59bcCf9CaBf4d39D1D3dB36c2eeb04ccaEF1ca59Ea2DefcA4D5cABB
+Client Seed: EDD97dA3B4E83301aFba
+Nonce: 1
 
-Calculation Steps:
-1. Create message: `":x9y8z7...:5:0"`
-2. Generate HMAC-SHA256 using server seed as key
-3. Take first 4 bytes of result: `[0x3A, 0x7F, 0xC1, 0x2B]`
-4. Calculate:
-   ```
-   (58/256) + (127/65536) + (193/16777216) + (43/4294967296) = 0.22671998
-   0.22671998 * 100 = 22.671998
-   floor(22.671998) + 1 = 23
-   ```
-5. Final number: **23**
+Seeds To Hexadecimal Message:
+HMAC_SHA256(aFDe1176F59bcCf9CaBf4d39D1D3dB36c2eeb04ccaEF1ca59Ea2DefcA4D5cABB:EDD97dA3B4E83301aFba:1:0)
 
-## Why This Is Fair
+Message To Hexadecimal:
+[5b], [bd], [d7], [79], 91, 19, 99, 93, 34, 4a, ab, bc, c8, 8f, f6, 6b, bc, c8, 81, 1b, b7, 7e, ed, d1, 14, 49, 99, 99, 9f, fd, d6, 69, 94, 4f, f6, 6b, ba, ad, d2, 28, 80, 0e, ea, a9, 9a, a0, 0e, e7, 71, 13, 3a, a8, 8e, e9, 9c, c8, 8e, ef, f8, 86, 6f, fa, a4, 4
 
-1. The house cannot predict or manipulate results because:
-   - The server seed hash commits to a specific value
-   - The client seed introduces player-controlled randomness
-   - The nonce ensures every game is unique
+Hexadecimal to Bytes:
+[91], [215], [145], [153], 52, 171, 200, 246, 188, 129, 183, 237, 20, 153, 159, 214, 148, 246, 186, 210, 128, 234, 154, 14, 113, 58, 142, 156, 142, 248, 111, 164
 
-2. Players can:
-   - Verify all calculations post-game
-   - Choose their own client seeds
-   - Request new server seeds at any time
+Bytes To Result Calculation:
+  (91 / (256^1))
++ (215 / (256^2))
++ (145 / (256^3))
++ (153 / (256^4))
+= 36.87580679450184
+=> 36

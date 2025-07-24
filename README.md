@@ -155,4 +155,3 @@ Calculation Steps:
    - Verify all calculations post-game
    - Choose their own client seeds
    - Request new server seeds at any time
-```

@@ -197,6 +197,7 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
         popup = Tk()
         popup.title("Rotate Seeds")
         popup.attributes('-fullscreen', True)
+        popup.protocol("WM_DELETE_WINDOW", lambda x:x)
         
         # Generate new seeds
         new_server = generate_server_seed()
@@ -204,14 +205,14 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
 
         # Server seed display (read-only)
         Label(popup, text="Previous Server Seed:", font=font,pady=20,padx=20).pack()
-        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry = Entry(popup, font=font, width=80, justify='center')
         server_entry.insert(0, sha256_encrypt(server))
         server_entry.config(state='readonly')
         server_entry.pack()
 
         # Server seed display (read-only)
         Label(popup, text="Previous Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
-        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry = Entry(popup, font=font, width=80, justify='center')
         server_entry.insert(0, sha256_encrypt(server_hashed))
         server_entry.config(state='readonly')
         server_entry.pack()
@@ -221,21 +222,21 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
 
         # Server seed display (read-only)
         Label(popup, text="Previous Client Seed:", font=font,pady=20,padx=20).pack()
-        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry = Entry(popup, font=font, width=80, justify='center')
         server_entry.insert(0, sha256_encrypt(client))
         server_entry.config(state='readonly')
         server_entry.pack()
         
         # Server seed display (read-only)
         Label(popup, text="New Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
-        server_entry = Entry(popup, font=font, width=100, justify='center')
+        server_entry = Entry(popup, font=font, width=80, justify='center')
         server_entry.insert(0, sha256_encrypt(new_server))
         server_entry.config(state='readonly')
         server_entry.pack()
         
         # Client seed entry (editable)
         Label(popup, text="Client Seed (edit if desired):", font=font,pady=20,padx=20).pack()
-        client_entry = Entry(popup, font=font, width=100, justify='center')
+        client_entry = Entry(popup, font=font, width=80, justify='center')
         client_entry.insert(0, new_client)
         client_entry.pack()
         

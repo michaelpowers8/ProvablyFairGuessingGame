@@ -35,13 +35,13 @@ The number generation formula:
 4. Type pip3 install -r requirements.txt
 5. pythonw ProvablyFairNumberGuessing.py
 
-Here's a detailed provably fair calculation breakdown in README.md format that explains exactly how your number generation system works:
+# Here's a detailed provably fair calculation breakdown in README.md format that explains exactly how your number generation system works:
 
 ## Provably Fair Calculation Breakdown
 
 ### Game Parameters
 - **Server Seed**: 64-character hex string (generated randomly)
-- **Client Seed**: 20-character hex string (player customizable)
+- **Client Seed**: 20-character hex string (player customizable to any number of characters)
 - **Nonce**: Incrementing integer (starts at 1)
 - **HMAC Algorithm**: HMAC-SHA256
 - **Number Range**: 1-100
@@ -50,7 +50,7 @@ Here's a detailed provably fair calculation breakdown in README.md format that e
 
 #### Step 1: Seed Combination
 The system combines seeds and nonce in this format:
-{server seed}{client seed}:{nonce}:{x}  # Where x is always 0 in this implementation
+{server seed}:{client seed}:{nonce}:{x}  # Where x is always 0 in this implementation
 
 #### Step 2: HMAC-SHA256 Hashing
 Creates HMAC using:

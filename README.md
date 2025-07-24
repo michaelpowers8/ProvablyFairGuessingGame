@@ -134,7 +134,7 @@ Seeds To Hexadecimal Message:
 HMAC_SHA256(aFDe1176F59bcCf9CaBf4d39D1D3dB36c2eeb04ccaEF1ca59Ea2DefcA4D5cABB:EDD97dA3B4E83301aFba:1:0)
 
 Message To Hexadecimal:
-[5b], [bd], [d7], [79], 91, 19, 99, 93, 34, 4a, ab, bc, c8, 8f, f6, 6b, bc, c8, 81, 1b, b7, 7e, ed, d1, 14, 49, 99, 99, 9f, fd, d6, 69, 94, 4f, f6, 6b, ba, ad, d2, 28, 80, 0e, ea, a9, 9a, a0, 0e, e7, 71, 13, 3a, a8, 8e, e9, 9c, c8, 8e, ef, f8, 86, 6f, fa, a4, 4
+**5b**, **bd**, **d7**, **79**, 91, 19, 99, 93, 34, 4a, ab, bc, c8, 8f, f6, 6b, bc, c8, 81, 1b, b7, 7e, ed, d1, 14, 49, 99, 99, 9f, fd, d6, 69, 94, 4f, f6, 6b, ba, ad, d2, 28, 80, 0e, ea, a9, 9a, a0, 0e, e7, 71, 13, 3a, a8, 8e, e9, 9c, c8, 8e, ef, f8, 86, 6f, fa, a4, 4
 
 Hexadecimal to Bytes:
 [91], [215], [145], [153], 52, 171, 200, 246, 188, 129, 183, 237, 20, 153, 159, 214, 148, 246, 186, 210, 128, 234, 154, 14, 113, 58, 142, 156, 142, 248, 111, 164

@@ -1,13 +1,13 @@
 import os
 import hmac
 import json
-import secrets
 import string
+import secrets
 import hashlib
-from math import exp, floor
 from time import sleep
-from turtle import Turtle,Screen,_Screen, bgcolor, width
+from math import exp, floor
 from tkinter import Tk,Label,Button,Entry,Canvas
+from turtle import Turtle,Screen,_Screen, bgcolor, width
 
 def generate_server_seed():
     possible_characters:str = string.hexdigits
@@ -30,7 +30,7 @@ def sha256_encrypt(input_string: str) -> str:
     return sha256_hash.hexdigest()
 
 def seeds_to_hexadecimals(server_seed:str,client_seed:str,nonce:int) -> list[str]:
-    messages:list[str] = [f"{client_seed}:{nonce}:{x}" for x in range(1)]
+    messages:list[str] = [f"{server_seed}:{client_seed}:{nonce}:{x}" for x in range(1)]
     hmac_objs:list[hmac.HMAC] = [hmac.new(server_seed.encode(),message.encode(),hashlib.sha256) for message in messages]
     return [hmac_obj.hexdigest() for hmac_obj in hmac_objs]
 
@@ -46,7 +46,7 @@ def bytes_to_number(bytes_list: list[int],multiplier:int) -> int:
                         (float(bytes_list[3]) / float(256**4))
                     )
     number = number*multiplier
-    return floor(number)+1 
+    return floor((number)+1)
 
 def seeds_to_results(server_seed:str,client_seed:str,nonce:int) -> str:
     hexs = seeds_to_hexadecimals(server_seed=server_seed,client_seed=client_seed,nonce=nonce)

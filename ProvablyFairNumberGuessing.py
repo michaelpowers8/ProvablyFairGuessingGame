@@ -201,36 +201,38 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
         
         # Generate new seeds
         new_server = generate_server_seed()
+        new_server_hashed = sha256_encrypt(new_server)
         new_client = generate_client_seed()
+        
 
         # Server seed display (read-only)
         Label(popup, text="Previous Server Seed:", font=font,pady=20,padx=20).pack()
         server_entry = Entry(popup, font=font, width=80, justify='center')
-        server_entry.insert(0, sha256_encrypt(server))
+        server_entry.insert(0, server)
         server_entry.config(state='readonly')
         server_entry.pack()
 
         # Server seed display (read-only)
         Label(popup, text="Previous Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
         server_entry = Entry(popup, font=font, width=80, justify='center')
-        server_entry.insert(0, sha256_encrypt(server_hashed))
+        server_entry.insert(0, server_hashed)
+        server_entry.config(state='readonly')
+        server_entry.pack()
+
+        # Server seed display (read-only)
+        Label(popup, text="Previous Client Seed:", font=font,pady=20,padx=20).pack()
+        server_entry = Entry(popup, font=font, width=80, justify='center')
+        server_entry.insert(0, client)
         server_entry.config(state='readonly')
         server_entry.pack()
 
         # Server seed display (read-only)
         Label(popup, text="", font=font,pady=60,padx=20).pack()
-
-        # Server seed display (read-only)
-        Label(popup, text="Previous Client Seed:", font=font,pady=20,padx=20).pack()
-        server_entry = Entry(popup, font=font, width=80, justify='center')
-        server_entry.insert(0, sha256_encrypt(client))
-        server_entry.config(state='readonly')
-        server_entry.pack()
         
         # Server seed display (read-only)
         Label(popup, text="New Server Seed (Hashed):", font=font,pady=20,padx=20).pack()
         server_entry = Entry(popup, font=font, width=80, justify='center')
-        server_entry.insert(0, sha256_encrypt(new_server))
+        server_entry.insert(0, new_server_hashed)
         server_entry.config(state='readonly')
         server_entry.pack()
         
@@ -246,7 +248,7 @@ def make_difficulty_buttons(canvas: Canvas, font: tuple[str, int, str], answer: 
             server = new_server
             server_hashed = sha256_encrypt(server)
             client = client_entry.get()
-            nonce = 1
+            # nonce = 1
             
             # Clear and redraw screen with new seeds
             clear_seeds_from_screen(seed_writer_turtle, screen)
